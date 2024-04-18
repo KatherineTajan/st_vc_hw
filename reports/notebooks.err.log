@@ -30,7 +30,12 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
+train_size = len(BTC_df_sorted.Close) - 28
+test_28 = BTC_df_sorted.Close[train_size:train_size + 28]
+dates_28 = BTC_df_sorted.Date[train_size:train_size + 28]
 
-model_fit,train,dates_train,best_order = arima_model_fit(BTC_df_sorted)
+test_28l = test_28.tolist()
+train_28l = train.tolist()
+yhat_28  = arima_rolling(train_28l, test_28l, best_order)
 -------------------
 
